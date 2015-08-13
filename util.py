@@ -1,10 +1,10 @@
 import csv
 import json
 import smtplib
-from grind_txts.constants import CARRIER_MAP
+from txtr.constants import CARRIER_MAP
 
-def ingest_grind_csv(csv_name):
-    grind_list = list()
+def ingest_user_csv(csv_name):
+    user_list = list()
     with open(csv_name) as f:
         reader = csv.DictReader(f, fieldnames=['timestamp', 'name', 'number', 'carrier'])
         header = reader.next()
@@ -20,12 +20,12 @@ def ingest_grind_csv(csv_name):
             if row['carrier'] == 'boost mobile':
                 row['carrier'] = 'boost'
 
-            grind_list.append(row)
+            user_list.append(row)
 
-    with open('grind_members.json', 'w') as f:
-        json.dump(grind_list, f)
+    with open('members.json', 'w') as f:
+        json.dump(user_list, f)
 
-    return grind_list
+    return user_list
 
 
 class Texter(object):
@@ -52,6 +52,6 @@ class Texter(object):
     def get_to_addr(cls, number, carrier):
         '''
         function takes two strings, the 10-digit phone number and the cell carrier
-        if you need to see how to format the carrier name, check CARRIER_MAP in grind_txts/constants.py
+        if you need to see how to format the carrier name, check CARRIER_MAP in txtr.constants
         '''
         return "%s@%s" % (str(number), CARRIER_MAP[carrier])

@@ -1,5 +1,5 @@
 """
-constants for the grind_txts module. require people to choose from a dropdown
+constants for the txtr module. require people to choose from a dropdown
 instead of allowing them to input their own carrier. this way you can ensure
 it maps correctly.
 """
@@ -16,6 +16,7 @@ CARRIER_MAP = {
     'virgin': 'vmobl.com'
 }
 
+# replace these with your specific email address, username and password
 EMAIL_ADDR = 'gmail_username@gmail.com'
 EMAIL_PASSWD = 'gmail_password'
 EMAIL_USERNAME = 'gmail_username'
