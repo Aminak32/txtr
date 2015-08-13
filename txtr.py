@@ -17,20 +17,23 @@ if __name__ == '__main__':
 
     # define command line args
     parser = argparse.ArgumentParser(description="mass texting module")
-    parser.add_argument('-i', '--ingest', action="store_true", default="False",
-                        help='csv file for ingestion')
-    parser.add_argument('-m' '--message', help='the message you wish to send')
+    parser.add_argument('-i', '--ingest',
+                        help='csv file for ingestion of users numbers and carriers')
+    parser.add_argument('-m', '--message',
+                        help='the message you wish to send')
     args = parser.parse_args()
 
 
     if args.ingest:
-        # sys.argv[2] is the filepath of the member csv
-        print ingest_user_csv(sys.argv[2])
+        print ingest_user_csv(args.ingest)
 
-    else:
-        msg = sys.argv[1]
+    elif args.message:
+        msg = args.message
         texter = Texter(EMAIL_USERNAME, EMAIL_PASSWD, EMAIL_ADDR)
         members = load_members()
         for m in members:
             to_addr = Texter.get_to_addr(m['number'], m['carrier'])
             texter.SMS_send(to_addr, msg)
+
+    else:
+        print "sorry, you must either provide a csv file to ingest or provide a message to send"
