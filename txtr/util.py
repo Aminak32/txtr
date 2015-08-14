@@ -1,13 +1,13 @@
 import csv
 import json
 import smtplib
-from txtr.constants import CARRIER_MAP
+from constants import CARRIER_MAP
 
 def ingest_user_csv(csv_name):
     user_list = list()
     with open(csv_name) as f:
         reader = csv.DictReader(f, fieldnames=['timestamp', 'name', 'number', 'carrier'])
-        header = reader.next()
+        # header = reader.next()
         for row in reader:
             del row['timestamp']
             row['carrier'] = row['carrier'].lower().strip()
