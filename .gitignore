@@ -1,4 +1,4 @@
-*myconstants.py
+*constants.py
 *.csv
 *.json
 *.DS_Store
